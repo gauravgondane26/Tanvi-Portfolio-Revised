@@ -33,7 +33,6 @@
     padding: 45px 20px 20px 0;
 }
 
-
 .description{
     margin-top: 20px;
     font-size: 20px;
@@ -115,6 +114,7 @@
     overflow: hidden; 
     height: 600px;
     margin: 10px 0 0 0;
+    padding: 5px;
     flex: 1 1 calc(33.333% - 10px);
 }
 
