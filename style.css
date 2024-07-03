@@ -51,7 +51,7 @@
 }
 
 .nav-links:hover {
-  border-bottom: 3px solid #fcd948;
+  color: #fcd948;
 }
 
 .container {
@@ -136,7 +136,7 @@
   display: flex;
 }
 
-.third-container {
+.fourth-container {
   display: flex;
   margin-bottom: 20px;
 }
@@ -277,12 +277,12 @@
   }
 
   .description h4 {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .description h5 {
-    font-size: 16px;
-    margin: 20px 20px 20px 20px;
+    font-size: 11px;
+    margin: 20px 20px 16px 20px;
   }
 
   .project {
@@ -291,8 +291,13 @@
   }
 
   .hero-image-container > img {
-    width: 250px;
-    height: 250px;
+    width: 350px;
+    height: 350px;
+    /* margin-top: 125px; */
+  }
+
+  .resume-link {
+    padding: 10px;
   }
 }
 
@@ -371,4 +376,56 @@
     width: 350px;
     height: 350px;
   }
+}
+
+
+
+
+
+
+.carousel {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    overflow: hidden;
+    /* border-radius: 10px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item {
+    min-width: 100%;
+    transition: opacity 0.5s ease;
+}
+
+.carousel-item img {
+    width: 100%;
+    display: block;
+    /* border-radius: 10px; */
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2em;
+    cursor: pointer;
+    padding: 10px;
+    /* border-radius: 50%; */
+    user-select: none;
+}
+
+.carousel-control.prev {
+    left: 10px;
+}
+
+.carousel-control.next {
+    right: 10px;
 }
