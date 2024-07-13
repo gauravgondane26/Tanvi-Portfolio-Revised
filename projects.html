@@ -5,19 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tanvi Shinde | Fun Projects</title>
         <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="./projects.css">
     </head>
     <body>
         <nav id="navbar" class="navbar">
             <div class="nav-container">
-                <a href="#home" class="nav-logo" onclick="reloadPage()">
+                <a href="index.html" class="nav-logo">
                     tanvi
                     <br>
                     shinde
                 </a>
-                <a href="./index.html" class="nav-links">HOME</a>
+                <a href="index.html" class="nav-links">HOME</a>
             </div>
         </nav>
-        <div class="carousel">
+        <!-- <div class="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="./resources/quilling/1.JPG" alt="Image 1">
@@ -31,36 +32,181 @@
             </div>
             <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
             <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
+        </div> -->
+        <div class="container">
+            <h1 class="Project-header">Quilling Projects</h1>
+            <section class="row">
+                <div class="nine columns">
+                    <div class="coverflow top10 bot10">
+                        <a class="prev-arrow"></a>
+                        <a href="">
+                            <img src="./resources/quilling/1.JPG" alt="Image 1" class="coverflow__image">
+                        </a>
+                        <a href="">
+                            <img src="./resources/quilling/2.JPG" alt="Image 2" class="coverflow__image">
+                        </a>
+                        <a href="">
+                            <img src="./resources/quilling/3.JPG" alt="Image 3" class="coverflow__image">
+                        </a>
+                        <a href="">
+                            <img src="./resources/quilling/4.JPG" alt="Image 4" class="coverflow__image">
+                        </a>
+                        <a href="">
+                            <img src="./resources/quilling/5.JPG" alt="Image 5" class="coverflow__image">
+                        </a>
+                        <a href="">
+                            <img src="./resources/quilling/6.JPG" alt="Image 6" class="coverflow__image">
+                        </a>
+                        <a href="">
+                            <img src="./resources/quilling/7.JPG" alt="Image 7" class="coverflow__image">
+                        </a>
+                        <a href="">
+                            <img src="./resources/quilling/8.JPG" alt="Image 8" class="coverflow__image">
+                        </a>
+                        <a href="">
+                            <img src="./resources/quilling/9.JPG" alt="Image 9" class="coverflow__image">
+                        </a>
+                        <a href="">
+                            <img src="./resources/quilling/10.JPG" alt="Image 10" class="coverflow__image">
+                        </a>
+                        <a class="next-arrow"></a>
+                    </div>
+                </div>
+            </section>
         </div>
     </body>
     <script>
-        let currentIndex = 0;
-        function showSlide(index) {
-            const slides = document.querySelectorAll('.carousel-item');
-            const totalSlides = slides.length;
+        // let currentIndex = 0;
+        // function showSlide(index) {
+        //     const slides = document.querySelectorAll('.carousel-item');
+        //     const totalSlides = slides.length;
 
-            if (index >= totalSlides) {
-                currentIndex = 0;
-            } else if (index < 0) {
-                currentIndex = totalSlides - 1;
+        //     if (index >= totalSlides) {
+        //         currentIndex = 0;
+        //     } else if (index < 0) {
+        //         currentIndex = totalSlides - 1;
+        //     } else {
+        //         currentIndex = index;
+        //     }
+
+        //     const newTransformValue = -currentIndex * 100;
+        //     document.querySelector('.carousel-inner').style.transform = `translateX(${newTransformValue}%)`;
+        // }
+
+        // function nextSlide() {
+        //     showSlide(currentIndex + 1);
+        // }
+
+        // function prevSlide() {
+        //     showSlide(currentIndex - 1);
+        // }
+
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     showSlide(currentIndex);
+        // });
+        var a = document.getElementsByTagName("a");
+        var cfImg = document.getElementsByClassName("coverflow__image")
+
+        var scaleI = 0;
+        for (scaleI; scaleI < a.length; scaleI++) {
+        if (scaleI === 3) {
+            continue;
+        } else {
+            a[scaleI].style.cursor = "default";
+            a[scaleI].addEventListener("click", prevDef);
+        }
+        }
+
+        function prevDef(e) {
+        e.preventDefault();
+        }
+
+        function forScale(coverflowPos) {
+        for (scaleI = 0; scaleI < a.length; scaleI++) {
+            a[scaleI].style.cursor = "default";
+            a[scaleI].addEventListener("click", prevDef);
+        }
+        for (scaleI = 0; scaleI < cfImg.length; scaleI++) {
+            if (cfImg[scaleI].getAttribute("data-coverflow-index") == coverflowPos) {
+            cfImg[scaleI].parentElement.style.cursor = "pointer";
+            cfImg[scaleI].parentElement.removeEventListener("click", prevDef);
+            }
+        }
+        }
+
+        function setupCoverflow(coverflowContainer) {
+        var coverflowContainers;
+
+        if (typeof coverflowContainer !== "undefined") {
+            if (Array.isArray(coverflowContainer)) {
+            coverflowContainers = coverflowContainer;
             } else {
-                currentIndex = index;
+            coverflowContainers = [coverflowContainer];
+            }
+        } else {
+            coverflowContainers = Array.prototype.slice.apply(document.getElementsByClassName('coverflow'));
+        }
+
+        coverflowContainers.forEach(function(containerElement) {
+            var coverflow = {};
+            var prevArrows, nextArrows;
+
+            coverflow.container = containerElement;
+            coverflow.images = Array.prototype.slice.apply(containerElement.getElementsByClassName('coverflow__image'));
+            coverflow.position = Math.floor(coverflow.images.length / 2) + 1;
+
+            coverflow.images.forEach(function(coverflowImage, i) {
+            coverflowImage.dataset.coverflowIndex = i + 1;
+            });
+
+            coverflow.container.dataset.coverflowPosition = coverflow.position;
+
+            prevArrows = Array.prototype.slice.apply(coverflow.container.getElementsByClassName("prev-arrow"));
+            nextArrows = Array.prototype.slice.apply(coverflow.container.getElementsByClassName("next-arrow"));
+
+            function setPrevImage() {
+            coverflow.position = Math.max(1, coverflow.position - 1);
+            coverflow.container.dataset.coverflowPosition = coverflow.position;
+            forScale(coverflow.position);
             }
 
-            const newTransformValue = -currentIndex * 100;
-            document.querySelector('.carousel-inner').style.transform = `translateX(${newTransformValue}%)`;
-        }
+            function setNextImage() {
+            coverflow.position = Math.min(coverflow.images.length, coverflow.position + 1);
+            coverflow.container.dataset.coverflowPosition = coverflow.position;
+            forScale(coverflow.position);
+            }
 
-        function nextSlide() {
-            showSlide(currentIndex + 1);
-        }
+            function jumpToImage(evt) {
+            coverflow.position = Math.min(coverflow.images.length, Math.max(1, evt.target.dataset.coverflowIndex));
+            coverflow.container.dataset.coverflowPosition = coverflow.position;
+            setTimeout(function() {
+                forScale(coverflow.position);
+            }, 1);
+            }
 
-        function prevSlide() {
-            showSlide(currentIndex - 1);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            showSlide(currentIndex);
+            function onKeyPress(evt) {
+            switch (evt.which) {
+                case 37:
+                setPrevImage();
+                break;
+                case 39:
+                setNextImage();
+                break;
+            }
+            }
+            prevArrows.forEach(function(prevArrow) {
+            prevArrow.addEventListener('click', setPrevImage);
+            });
+            nextArrows.forEach(function(nextArrow) {
+            nextArrow.addEventListener('click', setNextImage);
+            });
+            coverflow.images.forEach(function(image) {
+            image.addEventListener('click', jumpToImage);
+            });
+            window.addEventListener('keyup', onKeyPress);
         });
+        }
+
+        setupCoverflow();
     </script>
 </html>
